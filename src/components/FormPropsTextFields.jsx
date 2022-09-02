@@ -9,6 +9,7 @@ import BtnChangeTheme from "./BtnChangeTheme";
 import RobotMessage from "./RobotMessage";
 import { store } from "./store/index";
 import { addAuthor, addMessage } from "../actions/posts_actions";
+import { addPost } from "../actions/chats_actions";
 
 const sentMessage = "Your message has just been sent";
 
@@ -42,11 +43,12 @@ export default function FormPropsTextFields(props) {
     }, timeout);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   setPost({ ...post, message: message, author: author });
-  //   addMessageList(id, { message, author });
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // setPost({ ...post, message: message, author: author });
+    // addMessageList(id, { message, author });
+    dispatch(addPost(getState().post.post, id));
+  };
 
   const onChangeMessage = (value) => {
     // console.log("MSG: ", value);
@@ -68,7 +70,7 @@ export default function FormPropsTextFields(props) {
     <div className="container">
       <Box
         className="mui-form"
-        // onSubmit={handleSubmit}
+        onSubmit={handleSubmit}
         component="form"
         sx={{
           "& .MuiTextField-root": {
@@ -109,7 +111,7 @@ export default function FormPropsTextFields(props) {
             value={getState().post.author}
             onChange={onChangeAuthor}
           />
-          <BtnSendMessage id={id}>Send message</BtnSendMessage>
+          <BtnSendMessage>Send message</BtnSendMessage>
           <BtnChangeTheme />
           <RobotMessage robotMessage={robotMessage}></RobotMessage>
         </div>
