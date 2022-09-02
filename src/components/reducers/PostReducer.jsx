@@ -1,7 +1,7 @@
 import { ADD_MESSAGE, ADD_AUTHOR } from "../../constants/post";
 
 const initialState = {
-  post: { message: "", author: "" },
+  post: {},
 };
 
 export const messageReducer = (state = initialState, action) => {

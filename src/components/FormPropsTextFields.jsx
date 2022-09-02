@@ -10,23 +10,20 @@ import RobotMessage from "./RobotMessage";
 import { store } from "./store/index";
 import { addAuthor, addMessage } from "../actions/posts_actions";
 import { addPost } from "../actions/chats_actions";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
-  const { id, deleteMessageList, addMessageList, chats } = props;
-  // const [message, setMessage] = useState("");
-  // const [author, setAuthor] = useState("");
-  // const [post, setPost] = useState({});
+  const { id, deleteMessageList } = props;
   const [robotMessage, setRobotMessage] = useState("");
-
-  const { getState, dispatch, subscribe } = store;
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post.post);
 
   useEffect(() => {
     const showMessageTimeout = setTimeout(() => {
-      setRobotMessage(
-        Object.keys(getState().post).length !== 0 ? sentMessage : ""
-      );
+      setRobotMessage(Object.keys(post).length !== 0 ? sentMessage : "");
 
       clearRobotMessage(3000);
     }, 1500);
@@ -35,7 +32,7 @@ export default function FormPropsTextFields(props) {
       clearTimeout(showMessageTimeout);
       setRobotMessage("");
     };
-  }, [getState().post]);
+  }, [post]);
 
   const clearRobotMessage = (timeout) => {
     setTimeout(() => {
@@ -43,16 +40,7 @@ export default function FormPropsTextFields(props) {
     }, timeout);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // setPost({ ...post, message: message, author: author });
-    // addMessageList(id, { message, author });
-    dispatch(addPost(getState().post.post, id));
-  };
-
   const onChangeMessage = (value) => {
-    // console.log("MSG: ", value);
-    // setMessage(value);
     dispatch(addMessage(value));
   };
 
@@ -62,12 +50,13 @@ export default function FormPropsTextFields(props) {
     dispatch(addAuthor(value));
   };
 
-  // const onChangeAuthor = (e) => {
-  //   setAuthor(e.target.value);
-  // };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addPost(post, id));
+  };
 
   return (
-    <div className="container">
+    <div>
       <Box
         className="mui-form"
         onSubmit={handleSubmit}
@@ -103,14 +92,8 @@ export default function FormPropsTextFields(props) {
       >
         <div>
           <div>chat №{props.id}</div>
-          <MessageInput
-            value={getState().post.message}
-            onChange={onChangeMessage}
-          />
-          <AuthorInput
-            value={getState().post.author}
-            onChange={onChangeAuthor}
-          />
+          <MessageInput value={post.message} onChange={onChangeMessage} />
+          <AuthorInput value={post.author} onChange={onChangeAuthor} />
           <BtnSendMessage>Send message</BtnSendMessage>
           <BtnChangeTheme />
           <RobotMessage robotMessage={robotMessage}></RobotMessage>

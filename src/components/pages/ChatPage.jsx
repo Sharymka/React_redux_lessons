@@ -5,7 +5,7 @@ export default function ChatPage(props) {
   const { id, deleteMessageList, addMessageList, chats } = props;
 
   return (
-    <div>
+    <div className="container">
       <FormPropsTextFields
         chats={chats}
         addMessageList={addMessageList}

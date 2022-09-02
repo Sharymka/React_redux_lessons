@@ -10,15 +10,17 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import FolderIcon from "@mui/icons-material/Folder";
 import BtnDeleteMessage from "./BtnDeleteMessage";
-import { store } from "./store/index";
+
+import { useSelector } from "react-redux";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
 export default function InteractiveList(props) {
-  const { id, deleteMessageList, chats } = props;
-  const { getState } = store;
+  const { id, deleteMessageList } = props;
+
+  const chat = useSelector((state) => state.chats[id]);
 
   return (
     <Box
@@ -37,20 +39,24 @@ export default function InteractiveList(props) {
           </Typography>
           <Demo>
             <List>
-              {chats[id].messageList.map((message, index) => (
-                // console.log(id),
-                <ListItem key={"message" + index} className="list-item">
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={message.author}
-                    secondary={message.message}
-                  />
-                </ListItem>
-              ))}
+              {chat.messageList.map(
+                (message, index) => (
+                  console.log(chat.messageList),
+                  (
+                    <ListItem key={"message" + index} className="list-item">
+                      <ListItemAvatar>
+                        <Avatar>
+                          <FolderIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={message.author}
+                        secondary={message.message}
+                      />
+                    </ListItem>
+                  )
+                )
+              )}
               <BtnDeleteMessage id={id} deleteMessageList={deleteMessageList}>
                 Delete chat
               </BtnDeleteMessage>

@@ -1,4 +1,6 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { store } from "./components/store";
 // import { createTheme } from "@mui/material";
 import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
@@ -42,61 +44,63 @@ function App() {
   };
 
   return (
-    <ThemeProvider>
-      <BrowserRouter>
-        <header>
-          <Link to="/">Home</Link>
-          <ul>
-            <li>
-              <Link to="/chat">Chat</Link>
-              <ul>
-                {Object.values(chats).map((chat) => {
-                  return (
-                    <li key={chat.id}>
-                      {<Link to={`/chat/${chat.id}`}>Chat {chat.id}</Link>}
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-            <li>
-              <Link to="/profile">Profile</Link>
-            </li>
-          </ul>
-        </header>
-        <Switch>
-          <Route exact path="/">
-            <HomePage />
-          </Route>
-          <Route
-            path="/chat/:id"
-            render={(data) => {
-              const id = data.match.params.id;
-              const shouldRedirect = Object.keys(chats).every(
-                (key) => key !== id
-              );
-              if (shouldRedirect) {
-                return <Redirect to="/" />;
-              }
+    <Provider store={store}>
+      <ThemeProvider>
+        <BrowserRouter>
+          <header>
+            <Link to="/">Home</Link>
+            <ul>
+              <li>
+                <Link to="/chat">Chat</Link>
+                <ul>
+                  {Object.values(chats).map((chat) => {
+                    return (
+                      <li key={chat.id}>
+                        {<Link to={`/chat/${chat.id}`}>Chat {chat.id}</Link>}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </li>
+              <li>
+                <Link to="/profile">Profile</Link>
+              </li>
+            </ul>
+          </header>
+          <Switch>
+            <Route exact path="/">
+              <HomePage />
+            </Route>
+            <Route
+              path="/chat/:id"
+              render={(data) => {
+                const id = data.match.params.id;
+                const shouldRedirect = Object.keys(chats).every(
+                  (key) => key !== id
+                );
+                if (shouldRedirect) {
+                  return <Redirect to="/" />;
+                }
 
-              // return <TempPage id={id} />;
+                // return <TempPage id={id} />;
 
-              return (
-                <ChatPage
-                  addMessageList={addMessageList}
-                  deleteMessageList={deleteMessageList}
-                  id={id}
-                  chats={chats}
-                ></ChatPage>
-              );
-            }}
-          />
-          <Route path="/profile">
-            <ProfilePage />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    </ThemeProvider>
+                return (
+                  <ChatPage
+                    addMessageList={addMessageList}
+                    deleteMessageList={deleteMessageList}
+                    id={id}
+                    chats={chats}
+                  ></ChatPage>
+                );
+              }}
+            />
+            <Route path="/profile">
+              <ProfilePage />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   );
 }
 export default App;
