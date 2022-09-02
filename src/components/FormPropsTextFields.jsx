@@ -7,15 +7,19 @@ import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
 import BtnChangeTheme from "./BtnChangeTheme";
 import RobotMessage from "./RobotMessage";
+import { store } from "./store/index";
+import { addMessage } from "../actions/posts_actions";
 
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
   const { id, deleteMessageList, addMessageList, chats } = props;
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const [author, setAuthor] = useState("");
   const [post, setPost] = useState({});
   const [robotMessage, setRobotMessage] = useState("");
+
+  const { getState, dispatch, subscribe } = store;
 
   useEffect(() => {
     const showMessageTimeout = setTimeout(() => {
@@ -35,21 +39,17 @@ export default function FormPropsTextFields(props) {
       setRobotMessage("");
     }, timeout);
   };
-  // const add = () => {
-  //   setTimeout(() => {
-  //     addMessageList(id, post);
-  //   }, 0);
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setPost({ ...post, message: message, author: author });
+  //   addMessageList(id, { message, author });
   // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setPost({ ...post, message: message, author: author });
-    addMessageList(id, { message, author });
-  };
-
   const onChangeMessage = (value) => {
-    console.log("MSG: ", value);
-    setMessage(value);
+    // console.log("MSG: ", value);
+    // setMessage(value);
+    dispatch(addMessage(value));
   };
 
   const onChangeAuthor = (e) => {
@@ -60,7 +60,7 @@ export default function FormPropsTextFields(props) {
     <div className="container">
       <Box
         className="mui-form"
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         component="form"
         sx={{
           "& .MuiTextField-root": {
@@ -93,7 +93,10 @@ export default function FormPropsTextFields(props) {
       >
         <div>
           <div>chat №{props.id}</div>
-          <MessageInput value={message} onChange={onChangeMessage} />
+          <MessageInput
+            value={getState().post.message}
+            onChange={onChangeMessage}
+          />
           <AuthorInput value={author} onChange={onChangeAuthor} />
           <BtnSendMessage id={id}>Send message</BtnSendMessage>
           <BtnChangeTheme />
