@@ -8,22 +8,24 @@ import AuthorInput from "./AuthorInput";
 import BtnChangeTheme from "./BtnChangeTheme";
 import RobotMessage from "./RobotMessage";
 import { store } from "./store/index";
-import { addMessage } from "../actions/posts_actions";
+import { addAuthor, addMessage } from "../actions/posts_actions";
 
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
   const { id, deleteMessageList, addMessageList, chats } = props;
   // const [message, setMessage] = useState("");
-  const [author, setAuthor] = useState("");
-  const [post, setPost] = useState({});
+  // const [author, setAuthor] = useState("");
+  // const [post, setPost] = useState({});
   const [robotMessage, setRobotMessage] = useState("");
 
   const { getState, dispatch, subscribe } = store;
 
   useEffect(() => {
     const showMessageTimeout = setTimeout(() => {
-      setRobotMessage(Object.keys(post).length !== 0 ? sentMessage : "");
+      setRobotMessage(
+        Object.keys(getState().post).length !== 0 ? sentMessage : ""
+      );
 
       clearRobotMessage(3000);
     }, 1500);
@@ -32,7 +34,7 @@ export default function FormPropsTextFields(props) {
       clearTimeout(showMessageTimeout);
       setRobotMessage("");
     };
-  }, [post]);
+  }, [getState().post]);
 
   const clearRobotMessage = (timeout) => {
     setTimeout(() => {
@@ -52,9 +54,15 @@ export default function FormPropsTextFields(props) {
     dispatch(addMessage(value));
   };
 
-  const onChangeAuthor = (e) => {
-    setAuthor(e.target.value);
+  const onChangeAuthor = (value) => {
+    // console.log("MSG: ", value);
+    // setMessage(value);
+    dispatch(addAuthor(value));
   };
+
+  // const onChangeAuthor = (e) => {
+  //   setAuthor(e.target.value);
+  // };
 
   return (
     <div className="container">
@@ -97,7 +105,10 @@ export default function FormPropsTextFields(props) {
             value={getState().post.message}
             onChange={onChangeMessage}
           />
-          <AuthorInput value={author} onChange={onChangeAuthor} />
+          <AuthorInput
+            value={getState().post.author}
+            onChange={onChangeAuthor}
+          />
           <BtnSendMessage id={id}>Send message</BtnSendMessage>
           <BtnChangeTheme />
           <RobotMessage robotMessage={robotMessage}></RobotMessage>

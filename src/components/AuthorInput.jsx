@@ -5,7 +5,7 @@ export default function AuthorInput({ value, onChange }) {
     <TextField
       required
       className="mui-input"
-      onChange={onChange}
+      onChange={(event) => onChange(event.target.value)}
       value={value}
       id="standard-basic"
       label="Author"
