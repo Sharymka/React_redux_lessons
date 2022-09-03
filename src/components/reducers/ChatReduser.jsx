@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST } from "../../constants/chats";
+import { ADD_POST, DELETE_CHAT } from "../../constants/chats";
 const initialState = {
   1: {
     title: "chat 1",
@@ -29,12 +29,12 @@ export const chatsReducer = (state = initialState, action) => {
           ],
         },
       };
-    case DELETE_POST:
+    case DELETE_CHAT:
       return {
         ...state,
         [action.chatId]: {
           ...state[action.chatId],
-          messageList: [...state[action.chatId].messageList, action.payload],
+          messageList: [],
         },
       };
     default:

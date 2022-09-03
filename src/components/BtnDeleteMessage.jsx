@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-export default function BtnDeleteMessage({ id, deleteMessageList, children }) {
+export default function BtnDeleteMessage({ deleteMessageList, children }) {
   return (
     <Button
       style={{
@@ -10,9 +10,7 @@ export default function BtnDeleteMessage({ id, deleteMessageList, children }) {
         fontSize: "14px",
         marginTop: "10px",
       }}
-      onClick={() => {
-        deleteMessageList(id);
-      }}
+      onClick={deleteMessageList}
       variant="contained"
       type="submit"
     >

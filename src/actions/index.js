@@ -1,1 +1,1 @@
-export { addMessage } from "./posts_actions";
+export { changeMessageAction } from "./posts_actions";

@@ -10,8 +10,10 @@ import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import FolderIcon from "@mui/icons-material/Folder";
 import BtnDeleteMessage from "./BtnDeleteMessage";
+import store from "./store";
+import { deleteChat } from "../actions/chats_actions";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Demo = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -20,7 +22,13 @@ const Demo = styled("div")(({ theme }) => ({
 export default function InteractiveList(props) {
   const { id, deleteMessageList } = props;
 
-  const chat = useSelector((state) => state.chats[id]);
+  const chats = useSelector((state) => state.chats);
+  const dispatch = useDispatch();
+
+  const deleteChatList = () => {
+    console.log(chats);
+    dispatch(deleteChat(chats));
+  };
 
   return (
     <Box
@@ -39,9 +47,9 @@ export default function InteractiveList(props) {
           </Typography>
           <Demo>
             <List>
-              {chat.messageList.map(
+              {chats[id].messageList.map(
                 (message, index) => (
-                  console.log(chat.messageList),
+                  console.log(chats[id].messageList),
                   (
                     <ListItem key={"message" + index} className="list-item">
                       <ListItemAvatar>
@@ -57,7 +65,7 @@ export default function InteractiveList(props) {
                   )
                 )
               )}
-              <BtnDeleteMessage id={id} deleteMessageList={deleteMessageList}>
+              <BtnDeleteMessage deleteMessageList={deleteChatList}>
                 Delete chat
               </BtnDeleteMessage>
             </List>

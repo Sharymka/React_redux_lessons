@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import "./style.css";
-import InteractiveList from "./InteractiveList";
 import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
 import BtnChangeTheme from "./BtnChangeTheme";
 import RobotMessage from "./RobotMessage";
-import { store } from "./store/index";
-import { addAuthor, addMessage } from "../actions/posts_actions";
+import {
+  changeAuthorAction,
+  changeMessageAction,
+} from "../actions/posts_actions";
 import { addPost } from "../actions/chats_actions";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const sentMessage = "Your message has just been sent";
 
@@ -19,7 +19,7 @@ export default function FormPropsTextFields(props) {
   const { id, deleteMessageList } = props;
   const [robotMessage, setRobotMessage] = useState("");
   const dispatch = useDispatch();
-  const post = useSelector((state) => state.post.post);
+  const post = useSelector(({ post }) => post);
 
   useEffect(() => {
     const showMessageTimeout = setTimeout(() => {
@@ -41,13 +41,11 @@ export default function FormPropsTextFields(props) {
   };
 
   const onChangeMessage = (value) => {
-    dispatch(addMessage(value));
+    dispatch(changeMessageAction(value));
   };
 
   const onChangeAuthor = (value) => {
-    // console.log("MSG: ", value);
-    // setMessage(value);
-    dispatch(addAuthor(value));
+    dispatch(changeAuthorAction(value));
   };
 
   const handleSubmit = (e) => {
