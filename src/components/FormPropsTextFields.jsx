@@ -16,7 +16,7 @@ import getPost from "./store/PostReducer/selectors";
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
-  const { id } = props;
+  const { chatId } = props;
   const [robotMessage, setRobotMessage] = useState("");
   const dispatch = useDispatch();
   const post = useSelector(getPost);
@@ -50,7 +50,7 @@ export default function FormPropsTextFields(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPostAction(post, id));
+    dispatch(addPostAction(post, chatId));
   };
 
   return (

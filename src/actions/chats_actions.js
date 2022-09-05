@@ -1,14 +1,13 @@
 import { ADD_POST, DELETE_POST } from "../constants/chats";
 
-export const addPostAction = (post, id) => ({
+export const addPostAction = (post, chatId) => ({
   type: ADD_POST,
   payload: post,
-  chatId: id,
+  chatId: chatId,
 });
 
-export const deletePostAction = (chats, chatId, messageId) => ({
+export const deletePostAction = (chatId, postId) => ({
   type: DELETE_POST,
-  payload: chats,
   chatId: chatId,
-  messageId: messageId,
+  postId: postId,
 });

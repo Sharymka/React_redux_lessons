@@ -1,7 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
 import { store } from "./components/store";
-// import { createTheme } from "@mui/material";
 import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import HomePage from "./components/pages/HomePage";
@@ -11,37 +10,6 @@ import ThemeProvider from "./components/ThemeProvider";
 
 function App() {
   const { getState } = store;
-  // const [chats, setChats] = useState({
-  //   1: {
-  //     id: 1,
-  //     title: "chat 1",
-  //     messageList: [],
-  //   },
-  //   2: {
-  //     id: 2,
-  //     title: "chat 2",
-  //     messageList: [],
-  //   },
-  //   3: {
-  //     id: 3,
-  //     title: "chat 3",
-  //     messageList: [],
-  //   },
-  // });
-
-  // const addMessageList = (id, post) => {
-  //   const currentMessageList = [...chats[id].messageList, post];
-
-  //   const currentChat = { ...chats[id], messageList: currentMessageList };
-  //   console.log(currentChat, id);
-
-  //   setChats({ ...chats, [id]: currentChat });
-  // };
-
-  // const deleteMessageList = (id) => {
-  //   const currentChat = { ...chats[id], messageList: [] };
-  //   setChats({ ...chats, [id]: currentChat });
-  // };
 
   return (
     <Provider store={store}>
@@ -74,14 +42,16 @@ function App() {
             <Route
               path="/chat/:id"
               render={(data) => {
-                const id = data.match.params.id;
+                const chatId = data.match.params.id;
                 const shouldRedirect = Object.keys(getState().chats).every(
-                  (key) => key !== id
+                  (key) => key !== chatId
                 );
-                if (shouldRedirect) {
-                  return <Redirect to="/" />;
+                switch (!shouldRedirect) {
+                  case true:
+                    return <ChatPage chatId={chatId}></ChatPage>;
+                  default:
+                    return <Redirect to="/" />;
                 }
-                return <ChatPage id={id}></ChatPage>;
               }}
             />
             <Route path="/profile">

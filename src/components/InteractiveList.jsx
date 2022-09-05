@@ -5,30 +5,28 @@ import ListItemText from "@mui/material/ListItemText";
 import BtnDeleteMessage from "./BtnDeleteMessage";
 import { deletePostAction } from "../actions/chats_actions";
 import { useDispatch, useSelector } from "react-redux";
-// import getChats from "./store/ChatReducer/selectors";
 import "./style.css";
-// imsport getChatById from "./store/ChatReducer/selectors";
+import { useMemo } from "react";
+import getChatById from "./store/ChatReducer/selectors";
 
 export default function InteractiveList(props) {
-  const { id } = props;
+  const { chatId } = props;
 
-  // const getSelectedChat = useSelector(() => getChatById(id));
-  const chats = useSelector((state) => state.chats);
+  const getSelectedChat = useMemo(() => getChatById(chatId), [chatId]);
+  const selectedChat = useSelector(getSelectedChat);
 
   const dispatch = useDispatch();
 
-  const deletePost = (messageId) => {
-    const chatId = id;
-    console.log(chats);
-    dispatch(deletePostAction(chats, chatId, messageId));
+  const deletePost = (postId) => {
+    dispatch(deletePostAction(chatId, postId));
   };
 
   return (
     <Box className="list">
-      {chats[id].messageList.map((message, index) => (
+      {selectedChat.messageList.map((message, index) => (
         <ListItem key={"message" + index}>
           <ListItemText primary={message.author} secondary={message.message} />
-          <BtnDeleteMessage messageId={message.id} onClick={deletePost}>
+          <BtnDeleteMessage postId={message.id} onClick={deletePost}>
             Delete post
           </BtnDeleteMessage>
         </ListItem>

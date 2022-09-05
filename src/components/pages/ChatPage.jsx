@@ -2,21 +2,13 @@ import FormPropsTextFields from "../FormPropsTextFields";
 import InteractiveList from "../InteractiveList";
 
 export default function ChatPage(props) {
-  const { id, deleteMessageList, addMessageList, chats } = props;
+  const { chatId } = props;
 
   return (
     <div className="container">
-      <FormPropsTextFields
-        chats={chats}
-        addMessageList={addMessageList}
-        id={id}
-      />
+      <FormPropsTextFields chatId={chatId} />
       <div className="chat-list">
-        <InteractiveList
-          deleteMessageList={deleteMessageList}
-          id={id}
-          chats={chats}
-        ></InteractiveList>
+        <InteractiveList chatId={chatId}></InteractiveList>
       </div>
     </div>
   );

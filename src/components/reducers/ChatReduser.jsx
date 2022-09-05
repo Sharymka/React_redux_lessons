@@ -33,8 +33,9 @@ export const chatsReducer = (state = initialState, action) => {
         },
       };
     case DELETE_POST:
-      const changedMessageList = state[`${action.chatId}`].messageList.filter(
-        (post) => post.id !== action.messageId
+      console.log(state);
+      const changedMessageList = state[action.chatId].messageList.filter(
+        (post) => post.id !== action.postId
       );
       return {
         ...state,
