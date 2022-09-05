@@ -5,20 +5,16 @@ import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
 import RobotMessage from "./RobotMessage";
-import {
-  changeAuthorAction,
-  changeMessageAction,
-} from "../actions/posts_actions";
-import { addPostAction } from "../actions/chats_actions";
-import { useDispatch, useSelector } from "react-redux";
+import { changeAuthorAction, changeMessageAction } from "../actions";
+import { addPostAction } from "../actions";
+import { useSelector } from "react-redux";
 import getPost from "./store/PostReducer/selectors";
-
+// import actions from "../actions";
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
   const { chatId } = props;
   const [robotMessage, setRobotMessage] = useState("");
-  const dispatch = useDispatch();
   const post = useSelector(getPost);
 
   useEffect(() => {
@@ -41,16 +37,16 @@ export default function FormPropsTextFields(props) {
   };
 
   const onChangeMessage = (value) => {
-    dispatch(changeMessageAction(value));
+    changeMessageAction(value);
   };
 
   const onChangeAuthor = (value) => {
-    dispatch(changeAuthorAction(value));
+    changeAuthorAction(value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPostAction(post, chatId));
+    addPostAction(post, chatId);
   };
 
   return (

@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import BtnDeleteMessage from "./BtnDeleteMessage";
-import { deletePostAction } from "../actions/chats_actions";
-import { useDispatch, useSelector } from "react-redux";
+import { deletePostAction } from "../actions";
+import { useSelector } from "react-redux";
 import "./style.css";
 import { useMemo } from "react";
 import getChatById from "./store/ChatReducer/selectors";
@@ -15,10 +15,8 @@ export default function InteractiveList(props) {
   const getSelectedChat = useMemo(() => getChatById(chatId), [chatId]);
   const selectedChat = useSelector(getSelectedChat);
 
-  const dispatch = useDispatch();
-
   const deletePost = (postId) => {
-    dispatch(deletePostAction(chatId, postId));
+    deletePostAction(chatId, postId);
   };
 
   return (
