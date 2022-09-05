@@ -73,6 +73,18 @@
     gap: 130px;
 }
 
+.link_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.link {
+    text-decoration:none;
+    margin-right: 10px;
+}
+
 .mui-form {
     margin-top: 30px;
     width: 100%;

@@ -12,6 +12,7 @@ const actions = bindActionCreators(
 );
 
 export const {
+  addChatAction,
   addPostAction,
   deletePostAction,
   changeMessageAction,

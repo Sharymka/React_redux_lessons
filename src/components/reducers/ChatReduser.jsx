@@ -1,4 +1,4 @@
-import { ADD_POST, DELETE_POST } from "../../constants/chats";
+import { ADD_POST, DELETE_POST, ADD_CHAT } from "../../constants/chats";
 const initialState = {
   1: {
     id: 1,
@@ -18,8 +18,7 @@ const initialState = {
 };
 
 export const chatsReducer = (state = initialState, action) => {
-  console.log("action");
-  console.log(action);
+  // console.log(action.payload);
   switch (action.type) {
     case ADD_POST:
       return {
@@ -44,6 +43,9 @@ export const chatsReducer = (state = initialState, action) => {
           messageList: changedMessageList,
         },
       };
+    case ADD_CHAT:
+      console.log(action.payload);
+      return { ...state, [action.payload.id]: action.payload };
     default:
       return state;
   }

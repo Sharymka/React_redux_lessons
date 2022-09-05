@@ -9,7 +9,7 @@ import { changeAuthorAction, changeMessageAction } from "../actions";
 import { addPostAction } from "../actions";
 import { useSelector } from "react-redux";
 import getPost from "./store/PostReducer/selectors";
-// import actions from "../actions";
+
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
@@ -86,7 +86,6 @@ export default function FormPropsTextFields(props) {
           <MessageInput value={post.message} onChange={onChangeMessage} />
           <AuthorInput value={post.author} onChange={onChangeAuthor} />
           <BtnSendMessage>Send message</BtnSendMessage>
-          {/* <BtnChangeTheme /> */}
           <RobotMessage robotMessage={robotMessage}></RobotMessage>
         </div>
       </Box>
