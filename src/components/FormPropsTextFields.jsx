@@ -4,22 +4,22 @@ import "./style.css";
 import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
-import BtnChangeTheme from "./BtnChangeTheme";
 import RobotMessage from "./RobotMessage";
 import {
   changeAuthorAction,
   changeMessageAction,
 } from "../actions/posts_actions";
-import { addPost } from "../actions/chats_actions";
+import { addPostAction } from "../actions/chats_actions";
 import { useDispatch, useSelector } from "react-redux";
+import getPost from "./store/PostReducer/selectors";
 
 const sentMessage = "Your message has just been sent";
 
 export default function FormPropsTextFields(props) {
-  const { id, deleteMessageList } = props;
+  const { id } = props;
   const [robotMessage, setRobotMessage] = useState("");
   const dispatch = useDispatch();
-  const post = useSelector(({ post }) => post);
+  const post = useSelector(getPost);
 
   useEffect(() => {
     const showMessageTimeout = setTimeout(() => {
@@ -50,7 +50,7 @@ export default function FormPropsTextFields(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(addPost(post, id));
+    dispatch(addPostAction(post, id));
   };
 
   return (
@@ -85,15 +85,12 @@ export default function FormPropsTextFields(props) {
             borderBottomColor: "white",
           },
         }}
-        noValidate
-        autoComplete="off"
       >
         <div>
-          <div>chat №{props.id}</div>
           <MessageInput value={post.message} onChange={onChangeMessage} />
           <AuthorInput value={post.author} onChange={onChangeAuthor} />
           <BtnSendMessage>Send message</BtnSendMessage>
-          <BtnChangeTheme />
+          {/* <BtnChangeTheme /> */}
           <RobotMessage robotMessage={robotMessage}></RobotMessage>
         </div>
       </Box>

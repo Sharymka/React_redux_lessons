@@ -6,8 +6,8 @@ export default function BtnSendMessage(props) {
       style={{
         borderRadius: 5,
         backgroundColor: "rgb(197, 177, 216)",
-        padding: "18px 36px",
-        fontSize: "18px",
+        padding: "10px 15px",
+        fontSize: "14px",
         marginTop: "10px",
       }}
       variant="contained"

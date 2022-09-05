@@ -1,14 +1,17 @@
-import { ADD_POST, DELETE_CHAT } from "../../constants/chats";
+import { ADD_POST, DELETE_POST } from "../../constants/chats";
 const initialState = {
   1: {
+    id: 1,
     title: "chat 1",
     messageList: [],
   },
   2: {
+    id: 2,
     title: "chat 2",
     messageList: [],
   },
   3: {
+    id: 3,
     title: "chat 3",
     messageList: [],
   },
@@ -29,12 +32,15 @@ export const chatsReducer = (state = initialState, action) => {
           ],
         },
       };
-    case DELETE_CHAT:
+    case DELETE_POST:
+      const changedMessageList = state[`${action.chatId}`].messageList.filter(
+        (post) => post.id !== action.messageId
+      );
       return {
         ...state,
         [action.chatId]: {
           ...state[action.chatId],
-          messageList: [],
+          messageList: changedMessageList,
         },
       };
     default:
