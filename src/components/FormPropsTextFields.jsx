@@ -1,40 +1,25 @@
-import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import "./style.css";
 import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
 import RobotMessage from "./RobotMessage";
-import { changeAuthorAction, changeMessageAction } from "../actions";
+import {
+  changeAuthorAction,
+  changeMessageAction,
+  sendRobotMessageAction,
+} from "../actions";
 import { addPostAction } from "../actions";
 import { useSelector } from "react-redux";
 import getPost from "./store/PostReducer/selectors";
+import getRobotMessage from "./store/RobotReducer/selectors";
 
-const sentMessage = "Your message has just been sent";
+const robotMessage = "Your message just have been Sent";
 
 export default function FormPropsTextFields(props) {
   const { chatId } = props;
-  const [robotMessage, setRobotMessage] = useState("");
   const post = useSelector(getPost);
-
-  useEffect(() => {
-    const showMessageTimeout = setTimeout(() => {
-      setRobotMessage(Object.keys(post).length !== 0 ? sentMessage : "");
-
-      clearRobotMessage(3000);
-    }, 1500);
-
-    return () => {
-      clearTimeout(showMessageTimeout);
-      setRobotMessage("");
-    };
-  }, [post]);
-
-  const clearRobotMessage = (timeout) => {
-    setTimeout(() => {
-      setRobotMessage("");
-    }, timeout);
-  };
+  const message = useSelector(getRobotMessage);
 
   const onChangeMessage = (value) => {
     changeMessageAction(value);
@@ -47,6 +32,7 @@ export default function FormPropsTextFields(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     addPostAction(post, chatId);
+    sendRobotMessageAction(robotMessage);
   };
 
   return (
@@ -86,8 +72,8 @@ export default function FormPropsTextFields(props) {
           <MessageInput value={post.message} onChange={onChangeMessage} />
           <AuthorInput value={post.author} onChange={onChangeAuthor} />
           <BtnSendMessage>Send message</BtnSendMessage>
-          <RobotMessage robotMessage={robotMessage}></RobotMessage>
         </div>
+        <RobotMessage robotMessage={message}></RobotMessage>
       </Box>
     </div>
   );
