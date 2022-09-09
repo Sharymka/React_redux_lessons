@@ -21,4 +21,5 @@ export const {
   changeAuthorAction,
   robotMessageAction,
   sendRobotMessageAction,
+  addMesssageWithThunk,
 } = actions;

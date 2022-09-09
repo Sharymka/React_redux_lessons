@@ -1,4 +1,5 @@
 import { ADD_POST, DELETE_POST, ADD_CHAT } from "../constants/chats";
+import { robotMessageAction } from "./";
 
 export const addPostAction = (post, chatId) => ({
   type: ADD_POST,
@@ -20,3 +21,15 @@ export const addChatAction = (chatsLength) => ({
     messageList: [],
   },
 });
+
+export const addMesssageWithThunk = (post, chatId) => (dispatch) => {
+  console.log("thunk works");
+  dispatch(addPostAction(post, chatId));
+  const botMessage = "Your message just have been Sent";
+  setTimeout(() => {
+    setTimeout(() => {
+      robotMessageAction("");
+    }, 3000);
+    robotMessageAction(botMessage);
+  }, 2000);
+};
