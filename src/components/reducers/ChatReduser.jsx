@@ -43,7 +43,6 @@ export const chatsReducer = (state = initialState, action) => {
         },
       };
     case ADD_CHAT:
-      console.log(action.payload);
       return { ...state, [action.payload.id]: action.payload };
     default:
       return state;

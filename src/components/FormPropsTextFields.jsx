@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import "./style.css";
+import "../style.css";
 import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
@@ -7,8 +7,8 @@ import RobotMessage from "./RobotMessage";
 import { changeAuthorAction, changeMessageAction } from "../actions";
 import { addMesssageWithThunk } from "../actions";
 import { useSelector } from "react-redux";
-import getPost from "./store/PostReducer/selectors";
-import getRobotMessage from "./store/RobotReducer/selectors";
+import getPost from "../store/PostReducer/selectors";
+import getRobotMessage from "../store/RobotReducer/selectors";
 import { useCallback } from "react";
 
 export default function FormPropsTextFields(props) {
