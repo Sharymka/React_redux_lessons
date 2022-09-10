@@ -25,7 +25,8 @@ export default function ThemeProvider({
   return (
     <colorModeServicesContext.Provider value={toggleColorMode}>
       <MUIThemeProvider theme={theme}>
-        <CssBaseline>{children}</CssBaseline>
+        <CssBaseline />
+        {children}
       </MUIThemeProvider>
     </colorModeServicesContext.Provider>
   );
