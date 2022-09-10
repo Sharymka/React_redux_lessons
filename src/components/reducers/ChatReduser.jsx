@@ -18,7 +18,6 @@ const initialState = {
 };
 
 export const chatsReducer = (state = initialState, action) => {
-  // console.log(action.payload);
   switch (action.type) {
     case ADD_POST:
       return {

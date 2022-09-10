@@ -4,7 +4,6 @@ import {
   ThemeProvider as MUIThemeProvider,
 } from "@mui/material";
 import { useState, useMemo, createContext, useCallback } from "react";
-// import { ColorModeContext } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 export const colorModeServicesContext = createContext(undefined);
 

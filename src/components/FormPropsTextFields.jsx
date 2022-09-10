@@ -4,19 +4,12 @@ import BtnSendMessage from "./BtnSendMessage";
 import MessageInput from "./MessageInput";
 import AuthorInput from "./AuthorInput";
 import RobotMessage from "./RobotMessage";
-import {
-  changeAuthorAction,
-  changeMessageAction,
-  // sendRobotMessageAction,
-} from "../actions";
-// import { addPostAction } from "../actions";
+import { changeAuthorAction, changeMessageAction } from "../actions";
 import { addMesssageWithThunk } from "../actions";
 import { useSelector } from "react-redux";
 import getPost from "./store/PostReducer/selectors";
 import getRobotMessage from "./store/RobotReducer/selectors";
 import { useCallback } from "react";
-
-// const robotMessage = "Your message just have been Sent";
 
 export default function FormPropsTextFields(props) {
   const { chatId } = props;
@@ -37,8 +30,6 @@ export default function FormPropsTextFields(props) {
       console.log("event", e);
       addMesssageWithThunk(post, chatId);
       console.log("event2", e);
-      // addPostAction(post, chatId);
-      // sendRobotMessageAction(robotMessage);
     },
     [post, chatId]
   );

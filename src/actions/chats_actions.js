@@ -23,7 +23,6 @@ export const addChatAction = (chatsLength) => ({
 });
 
 export const addMesssageWithThunk = (post, chatId) => (dispatch) => {
-  console.log("thunk works");
   dispatch(addPostAction(post, chatId));
   const botMessage = "Your message just have been Sent";
   setTimeout(() => {
