@@ -11,7 +11,6 @@ import { useSelector } from "react-redux";
 import { getChats } from "./store/ChatReducer/selectors";
 import { getDogsAction } from "./actions";
 import { addChatAction } from "./actions";
-// import { getErrorAction } from "./actions";
 import "./style.css";
 
 function App() {
