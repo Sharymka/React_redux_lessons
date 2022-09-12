@@ -1,19 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/HomePage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
+import DogsPage from "./pages/DogsPage";
 import ThemeProvider from "./components/ThemeProvider";
 import BtnAddChat from "./components/BtnAddChat";
 import { useSelector } from "react-redux";
 import { getChats } from "./store/ChatReducer/selectors";
+import { getDogsAction } from "./actions";
 import { addChatAction } from "./actions";
+// import { getErrorAction } from "./actions";
 import "./style.css";
 
 function App() {
   const chats = useSelector(getChats());
   const chatsLength = Object.keys(chats).length;
+
+  useEffect(() => {
+    getDogsAction();
+  }, []);
 
   const addChat = () => {
     addChatAction(chatsLength);
@@ -55,6 +62,11 @@ function App() {
                 Profile
               </Link>
             </li>
+            <li>
+              <Link className="link" to="/dogs">
+                Dogs
+              </Link>
+            </li>
           </ul>
         </header>
         <Switch>
@@ -84,6 +96,9 @@ function App() {
 
           <Route path="/profile">
             <ProfilePage />
+          </Route>
+          <Route exact path="/dogs">
+            <DogsPage />
           </Route>
         </Switch>
       </BrowserRouter>
