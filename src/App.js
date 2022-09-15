@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import HomePage from "./pages/HomePage";
+import RegistrationPage from "./pages/RegistrationPage";
 import ChatPage from "./pages/ChatPage";
 import ProfilePage from "./pages/ProfilePage";
 import DogsPage from "./pages/DogsPage";
+import SignInPage from "./pages/SignInPage";
 import ThemeProvider from "./components/ThemeProvider";
 import BtnAddChat from "./components/BtnAddChat";
 import { useSelector } from "react-redux";
@@ -69,8 +70,11 @@ function App() {
           </ul>
         </header>
         <Switch>
-          <Route exact path="/">
-            <HomePage />
+          <Route exact path="/registration">
+            <RegistrationPage />
+          </Route>
+          <Route exact path="/chat">
+            Чаты
           </Route>
           <Route
             path="/chat/:id"
@@ -98,6 +102,9 @@ function App() {
           </Route>
           <Route exact path="/dogs">
             <DogsPage />
+          </Route>
+          <Route path="/sign-in">
+            <SignInPage />
           </Route>
         </Switch>
       </BrowserRouter>
