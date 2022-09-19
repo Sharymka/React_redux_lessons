@@ -1,26 +1,58 @@
-import { Typography, TextField, Box } from "@mui/material";
-// import { Fragment } from "react";
-import { Button } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import "../App.css";
-import { fetchUserRegistration } from "../utilits";
-import { getErrorAction } from "../actions/error_actions";
-import { Link, useHistory, Link as RouteLink } from "react-router-dom";
+import { Box, Button, TextField, Typography } from '@mui/material';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 
-export default function SignInPage(props) {
-  const dispatch = useDispatch();
+import { fetchUserAction } from '../actions';
+import '../App.css';
+import { usePrevious } from '../hooks/usePrevious';
+import { getUser } from '../store/userReducer/selector';
+import { useSelector } from 'react-redux';
+// import { Header } from '../components/Header';
+
+
+export default function SignInPage() {
   const history = useHistory();
-  // const user = useSelector(getUser);
+  const user = useSelector(getUser);
+  const prevUserValue = usePrevious(user);
+
+  const [credentials, setCredentials] = useState({ password: '', email: '' });
+
+    useEffect(() => {
+      console.log('use effect in SignIn ', prevUserValue);
+      console.log('use effect in SignIn ', user);
+
+      if (user.token && !prevUserValue?.token) {
+        history.push('/chat1');
+        
+      }
+    }, [user, history, prevUserValue]);
+
+  const onChangePassword = (event) => {
+    setCredentials({ ...credentials, password: event.target.value });
+  };
+
+  const onChangeEmail = (event) => {
+    setCredentials({ ...credentials, email: event.target.value });
+  };
+
+  const handleSignIn = () => {
+    console.log('credentials', credentials);
+    fetchUserAction(credentials);
+    history.push('/chat1');
+
+  };
+
   return (
     <>
       <Typography
         variant="h2"
         gutterBottom
         sx={{
-          color: "rgb(160, 99, 169)",
+          color: 'rgb(160, 99, 169)',
           fontWeight: 700,
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         Sign in
@@ -32,16 +64,16 @@ export default function SignInPage(props) {
         component="form"
       >
         <TextField
-          //   onChange={onChangeEmail}
+          onChange={onChangeEmail}
           name="email"
-          //   value={registration.email}
+          value={credentials.email}
           label="Email"
         />
         <TextField
-          //   onChange={onChangePassword}
+          onChange={onChangePassword}
           name="password"
-          type={"password"}
-          //   value={registration.password}
+          type="password"
+          value={credentials.password}
           label="Password"
           autoComplete="unkown"
         />
@@ -51,12 +83,12 @@ export default function SignInPage(props) {
           variant="outlined"
           href="#outlined-buttons"
           type="submit"
-          //   onClick={handleRegistration}
+          onClick={handleSignIn}
         >
           Auth
         </Button>
         <p>
-          If you don't have an account,
+          If you don&apos;t have an account,
           <Link to="/registration">registration</Link>
         </p>
       </Box>

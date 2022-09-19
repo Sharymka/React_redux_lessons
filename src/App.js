@@ -1,24 +1,48 @@
-import React, { useEffect } from "react";
-import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
-import "./App.css";
-import RegistrationPage from "./pages/RegistrationPage";
-import ChatPage from "./pages/ChatPage";
-import ProfilePage from "./pages/ProfilePage";
-import DogsPage from "./pages/DogsPage";
-import SignInPage from "./pages/SignInPage";
-import ThemeProvider from "./components/ThemeProvider";
-import BtnAddChat from "./components/BtnAddChat";
-import { useSelector } from "react-redux";
-import { getChats } from "./store/ChatReducer/selectors";
-import { getDogsAction } from "./actions";
-import { addChatAction } from "./actions";
-import "./style.css";
+import { useCallback, useEffect, useState } from 'react';
+import {
+  Redirect, BrowserRouter, Switch, Route
+} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import './App.css';
+import RegistrationPage from './pages/RegistrationPage';
+import ChatPage from './pages/ChatPage';
+import ProfilePage from './pages/ProfilePage';
+import DogsPage from './pages/DogsPage';
+import SignInPage from './pages/SignInPage';
+import ThemeProvider from './components/ThemeProvider';
+import BtnAddChat from './components/BtnAddChat';
+import { getChats } from './store/ChatReducer/selectors';
+import { getDogsAction, addChatAction } from './actions';
+import { usePrevious } from './hooks/usePrevious';
+import { getUser } from './store/userReducer/selector';
+
+import './style.css';
+import { Header } from './components/Header';
+// import { render } from '@testing-library/react';
 
 function App() {
   const chats = useSelector(getChats());
+  const user = useSelector(getUser);
+  const prevUserValue = usePrevious(user);
+
+  // eslint-disable-next-line no-unused-vars
+  const [sobaka, setSobaka] = useState(false);
+
   const chatsLength = Object.keys(chats).length;
 
+  const callback = useCallback(() => {
+    // console.log('callback used', user, prevUserValue);
+
+    if (user.token && !prevUserValue?.token) {
+      console.log('has user')
+      setSobaka(true);
+    }
+  }, [user, history, prevUserValue]);
+
   useEffect(() => {
+    callback();
+
     getDogsAction();
   }, []);
 
@@ -29,48 +53,11 @@ function App() {
   return (
     <ThemeProvider>
       <BrowserRouter>
-        <header>
-          <ul className="link_list">
-            <li>
-              <Link className="link" to="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link className="link " to="/chat">
-                Chat
-              </Link>
-              <ul className="link_list">
-                {Object.values(chats).map((chat) => {
-                  return (
-                    <li key={chat.id}>
-                      {
-                        <Link
-                          className="link chat_link"
-                          to={`/chat/${chat.id}`}
-                        >
-                          Chat {chat.id}
-                        </Link>
-                      }
-                    </li>
-                  );
-                })}
-              </ul>
-            </li>
-            <li>
-              <Link className="link" to="/profile">
-                Profile
-              </Link>
-            </li>
-            <li>
-              <Link className="link" to="/dogs">
-                Dogs
-              </Link>
-            </li>
-          </ul>
-        </header>
+      {user.email?<Header></Header>:<></>
+
+      }
         <Switch>
-          <Route exact path="/registration">
+          <Route path="/registration">
             <RegistrationPage />
           </Route>
           <Route exact path="/chat">
@@ -79,16 +66,17 @@ function App() {
           <Route
             path="/chat/:id"
             render={(data) => {
+              console.log('ss');
               const chatId = data.match.params.id;
               const shouldRedirect = Object.keys(chats).every(
-                (key) => key !== chatId
+                (key) => key !== chatId,
               );
               switch (!shouldRedirect) {
                 case true:
                   return (
                     <>
                       <BtnAddChat onClick={addChat}> Add Chat</BtnAddChat>
-                      <ChatPage chatId={chatId}></ChatPage>
+                      <ChatPage chatId={chatId} />
                     </>
                   );
                 default:
@@ -96,15 +84,20 @@ function App() {
               }
             }}
           />
-
-          <Route path="/profile">
+          <Route  path="/profile">
             <ProfilePage />
           </Route>
-          <Route exact path="/dogs">
+          <Route  path="/dogs">
             <DogsPage />
           </Route>
-          <Route path="/sign-in">
+          <Route exact path="/sign-in">
             <SignInPage />
+          </Route>
+          <Route path="/registration">
+            <RegistrationPage />
+          </Route>
+          <Route exact path="/">
+            <Redirect to="/registration" />
           </Route>
         </Switch>
       </BrowserRouter>

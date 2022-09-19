@@ -1,6 +1,8 @@
-import React from "react";
+import React from 'react';
 
 export default class Clock extends React.Component {
+  timerID = null;
+
   constructor(props) {
     super(props);
 
@@ -8,16 +10,15 @@ export default class Clock extends React.Component {
       date: new Date(),
     };
   }
-  timerID = null;
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log(prevState);
-  }
 
   componentDidMount() {
     this.timerID = setInterval(() => {
       this.setState({ date: new Date() });
     }, 1000);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log(prevState);
   }
 
   componentWillUnmount() {

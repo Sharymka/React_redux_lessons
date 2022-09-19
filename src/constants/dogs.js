@@ -1,1 +1,1 @@
-export const ADD_DOGS = "add dogs";
+export const ADD_DOGS = 'add dogs';

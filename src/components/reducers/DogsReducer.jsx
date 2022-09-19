@@ -1,8 +1,8 @@
-import { ADD_DOGS } from "../../constants/dogs";
+import { ADD_DOGS } from '../../constants/dogs';
 
 const initialState = {
-  url: "",
-  status: "",
+  url: '',
+  status: '',
 };
 
 export const dogsReducer = (state = initialState, action) => {

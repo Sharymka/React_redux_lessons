@@ -1,32 +1,37 @@
-import { Typography, TextField, Box } from "@mui/material";
-// import { Fragment } from "react";
-import { Button } from "@mui/material";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import "../App.css";
-import { fetchUserRegistration } from "../utilits";
-import { getErrorAction } from "../actions/error_actions";
-import { Link, useHistory } from "react-router-dom";
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
+import {
+  Button, Typography, TextField, Box,
+} from '@mui/material';
 
-export default function RegistrationPage(props) {
+import '../App.css';
+import { getErrorAction } from '../actions/error_actions';
+import { fetchUserRegistration } from '../utils';
+
+export default function RegistrationPage() {
   const history = useHistory();
   const dispatch = useDispatch();
-  const [registration, setRegistration] = useState({ password: "", email: "" });
+  const [credentials, setCredentials] = useState({ password: '', email: '' });
 
   const onChangePassword = (event) => {
-    setRegistration({ ...registration, password: event.target.value });
+    setCredentials({ ...credentials, password: event.target.value });
   };
   const onChangeEmail = (event) => {
-    setRegistration({ ...registration, email: event.target.value });
+    setCredentials({ ...credentials, email: event.target.value });
   };
 
   const handleRegistration = async () => {
     try {
-      await fetchUserRegistration(registration);
-      history.push("/chat/1");
+      const user = await fetchUserRegistration(credentials);
+      console.log('credentials', credentials);
+
+      console.log('user', user);
+
+      history.push('/sign-in');
     } catch (error) {
       dispatch(getErrorAction(error.message));
-      console.log("ошибка", error.message);
+      console.log('ошибка', error.message);
     }
   };
 
@@ -36,9 +41,9 @@ export default function RegistrationPage(props) {
         variant="h2"
         gutterBottom
         sx={{
-          color: "rgb(160, 99, 169)",
+          color: 'rgb(160, 99, 169)',
           fontWeight: 700,
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         Registration
@@ -52,14 +57,14 @@ export default function RegistrationPage(props) {
         <TextField
           onChange={onChangeEmail}
           name="email"
-          value={registration.email}
+          value={credentials.email}
           label="Email"
         />
         <TextField
           onChange={onChangePassword}
           name="password"
-          type={"password"}
-          value={registration.password}
+          type="password"
+          value={credentials.password}
           label="Password"
           autoComplete="unkown"
         />
@@ -74,27 +79,27 @@ export default function RegistrationPage(props) {
           Auth
         </Button>
         <p>
-          If you've already had an account,
-          <Link to="/sign-in">sign in</Link>
+          If you &apos; already had an account,
+          <Link  to="/sign-in">sign in</Link>
         </p>
       </Box>
     </>
 
-    // <>
-    //   <Box>
-    //
-    //     <Button variant="outlined" color="primary" href="#outlined-buttons">
-    //       Link
-    //     </Button>
-    //   </Box>
+  // <>
+  //   <Box>
+  //
+  //     <Button variant="outlined" color="primary" href="#outlined-buttons">
+  //       Link
+  //     </Button>
+  //   </Box>
 
-    //   <Divider sx={{ mt: "16px", mb: "8px" }} />
+  //   <Divider sx={{ mt: "16px", mb: "8px" }} />
 
-    //   <Typography variant="body1" sx={{ textAlign: "center" }}>
-    //     If you don't have an account,
-    //     <Link>register</Link>
-    //   </Typography>
-    //   <Box />
-    // </>
+  //   <Typography variant="body1" sx={{ textAlign: "center" }}>
+  //     If you don't have an account,
+  //     <Link>register</Link>
+  //   </Typography>
+  //   <Box />
+  // </>
   );
 }

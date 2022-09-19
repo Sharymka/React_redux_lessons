@@ -1,5 +1,5 @@
-import { ADD_DOGS } from "../constants/dogs";
-import { getErrorAction } from "./error_actions";
+import { ADD_DOGS } from '../constants/dogs';
+import { getErrorAction } from './error_actions';
 
 let count = 0;
 
@@ -11,23 +11,22 @@ export const addDogsAction = (dogs) => ({
 
 export const getDogsAction = () => async (dispatch) => {
   console.log(count);
-  dispatch(getErrorAction(""));
+  dispatch(getErrorAction(''));
   try {
-    const url =
-      count > 3
-        ? "https://dog.ceo/api/breeds/image/random"
-        : "https://do3g.ceo/api/breeds/image/random";
+    const url = count > 3
+      ? 'https://dog.ceo/api/breeds/image/random'
+      : 'https://do3g.ceo/api/breeds/image/random';
 
     console.log(url);
 
     const response = await fetch(url);
     const dogs = await response.json();
     if (!response.ok) {
-      throw new Error("Bad Response");
+      throw new Error('Bad Response');
     }
     dispatch(addDogsAction(dogs));
   } catch (err) {
-    const error = new Error("Internal Server Error");
+    const error = new Error('Internal Server Error');
     dispatch(getErrorAction(error.message));
   }
   count += 1;

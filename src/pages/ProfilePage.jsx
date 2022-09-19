@@ -1,8 +1,8 @@
-import { Checkbox } from "@mui/material";
-import { FormControlLabel } from "@mui/material";
-import { useEffect } from "react";
-import { store } from "../store/index";
-import "../style.css";
+import { useEffect } from 'react';
+import { Checkbox, FormControlLabel } from '@mui/material';
+
+import { store } from '../store/index';
+import '../style.css';
 
 export default function ProfilePage() {
   const { getState, dispatch, subscribe } = store;
@@ -16,9 +16,9 @@ export default function ProfilePage() {
   }, [getState, subscribe]);
 
   const handleChange = (event) => {
-    let check = event.target.checked;
-    let value = event.target.value;
-    dispatch({ type: { value: value, check: check } });
+    const check = event.target.checked;
+    const { value } = event.target;
+    dispatch({ type: { value, check } });
   };
 
   return (

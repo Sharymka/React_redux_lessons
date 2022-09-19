@@ -1,27 +1,27 @@
-import { robotMessageAction } from "./actions";
+import { robotMessageAction } from './actions';
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { app } from "./firebase";
+} from 'firebase/auth';
+import { app } from './firebase';
 
 export function clearRobotMessage() {
   setTimeout(() => {
-    robotMessageAction("");
+    robotMessageAction('');
   }, 3000);
 }
 
 export const fetchUserRegistration = async ({ email, password }) => {
   const auth = getAuth(app);
-  console.log("auth", auth);
+  console.log('auth', auth);
 
   const userCredential = await createUserWithEmailAndPassword(
     auth,
     email,
     password
   );
-  console.log("userCredential", userCredential);
+  console.log('userCredential', userCredential);
   return userCredential.user;
 };
 

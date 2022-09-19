@@ -1,1 +1,1 @@
-export const ADD_ROBOT_MESSAGE = "add robot mesage";
+export const ADD_ROBOT_MESSAGE = 'add robot mesage';

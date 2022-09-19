@@ -16,10 +16,10 @@ function changeState(state, action) {
 
 export const profileReducer = (state = initialState, action) => {
   switch (action.type.value) {
-    case "english":
-    case "russian":
-    case "french":
-    case "german":
+    case 'english':
+    case 'russian':
+    case 'french':
+    case 'german':
       return changeState(state, action);
     default:
       return state;

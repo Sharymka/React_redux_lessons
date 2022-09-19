@@ -36,15 +36,15 @@
 // }
 
 export function fetchData() {
-  fetch("https://jsonplaceholder.typicode.com/posts", {
-    method: "POST",
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
     body: JSON.stringify({
-      title: "foo",
-      bar: "bar",
+      title: 'foo',
+      bar: 'bar',
       userId: 1,
     }),
     headers: {
-      "content-type": "aplication/json; charset=UTF-8",
+      'content-type': 'aplication/json; charset=UTF-8',
     },
   })
     .then((response) => response.json())

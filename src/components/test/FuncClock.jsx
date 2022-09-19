@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 let timerID = null;
 
@@ -12,5 +12,10 @@ export default function FuncClock() {
     };
   }, [date]);
 
-  return <div>Сейчас{date.toLocaleTimeString()}</div>;
+  return (
+    <div>
+      Сейчас
+      {date.toLocaleTimeString()}
+    </div>
+  );
 }

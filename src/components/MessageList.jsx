@@ -1,17 +1,22 @@
-import BtnDeleteMessage from "./BtnDeleteMessage";
+import BtnDeleteMessage from './BtnDeleteMessage';
 
-export default function MessageList(props) {
-  const { id, deleteMessageList, chats } = props;
+export default function MessageList({
+  id, deleteMessageList, chats, children,
+}) {
   return (
     <div className="list">
-      {props.children}
+      {children}
       {chats[id].messageList.map((message, index) => (
-        <div key={"message" + index} className="list-item">
+        <div key={`message${index}`} className="list-item">
           <div className="text">
             <span className="author">
-              {index + 1}. {message.author}: &nbsp;
+              {index + 1}
+              .
+              {' '}
+              {message.author}
+              : &nbsp;
             </span>
-            "{message.message}"
+            &quot;{message.message}&quot;
           </div>
         </div>
       ))}
