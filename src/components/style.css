@@ -1,0 +1,121 @@
+
+
+.title{
+    color: brown;
+    font-size: 40px;
+    font-style: italic;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    margin: 30px 0;
+    border: 1px solid rgb(242, 215, 246);
+    background-color: rgb(242, 215, 246);
+    box-shadow: 2px 2px 14px -4px rgba(34, 60, 80, 0.2);
+    border-radius: 4px;
+    padding: 10px;
+    width: 17%;
+}
+
+.input{
+    margin-top: 4px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    outline: none;
+    text-transform:initial;
+    color:white;
+    border: 1px solid rgb(248, 246, 246);
+}
+.name {
+    text-transform: capitalize;
+}
+
+.label {
+    font-size: 18px;
+    color:rgb(226, 193, 230);
+    font-weight: 700;
+}
+
+.button {
+    padding: 7px 10px;
+    font-size: 16px;
+    background-color: rgb(160, 99, 169);
+    color: white;
+    border-radius: 5px;
+    font-weight: 700;
+    border: 2px solid rgb(160, 99, 169);
+}
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    font-size: 18px;
+    color:rgb(111, 68, 117);
+    font-weight: 700;  
+}
+
+.list {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-top: 10px;
+    padding: 5px;
+}
+.list-item {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 130px;
+}
+
+.link_list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style-type: none;
+}
+
+.link {
+    text-decoration:none;
+    margin-right: 10px;
+}
+
+.mui-form {
+    margin-top: 30px;
+    width: 100%;
+    border: 1px solid rgb(192, 153, 228);
+    padding: 15px 0 25px 15px;
+    border-radius: 5px;
+    background-color: rgb(192, 153, 228);
+    /* background-color: rgb(214, 197, 230); */
+}
+
+.mui-input {
+   text-transform: uppercase;
+   
+}
+.input::placeholder {
+    color: white;
+ }
+ .robotM {
+    color: white;
+ }
+
+ .chat-list {
+    display: flex;
+    gap: 10px;
+ }
+
+ .checkbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+ }
+
+
+
