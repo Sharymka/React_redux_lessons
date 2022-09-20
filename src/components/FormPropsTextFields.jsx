@@ -1,12 +1,12 @@
 import Box from '@mui/material/Box';
-import '../style.css';
-import { useSelector } from 'react-redux';
 import { useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { addMessageWithFirebase, changeAuthorAction, changeMessageAction } from '../actions';
+import '../style.css';
+import AuthorInput from './AuthorInput';
 import BtnSendMessage from './BtnSendMessage';
 import MessageInput from './MessageInput';
-import AuthorInput from './AuthorInput';
 import RobotMessage from './RobotMessage';
-import { changeAuthorAction, changeMessageAction, addMesssageWithThunk, addMessageWithFirebase } from '../actions';
 
 import getPost from '../store/PostReducer/selectors';
 import getRobotMessage from '../store/RobotReducer/selectors';
@@ -28,11 +28,12 @@ export default function FormPropsTextFields(props) {
     (e) => {
       e.preventDefault();
       console.log('event', e);
-      addMesssageWithThunk(post, chatId);
+      // addMesssageWithThunk(post, chatId);
       addMessageWithFirebase(post, chatId);
       console.log('event2', e);
     },
     [post, chatId],
+  
   );
 
   return (

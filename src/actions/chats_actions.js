@@ -1,8 +1,8 @@
-import { ADD_POST, DELETE_POST, ADD_CHAT } from '../constants/chats';
+import { push, ref, set } from 'firebase/database';
 import { robotMessageAction } from '.';
+import { ADD_CHAT, ADD_POST, DELETE_POST } from '../constants/chats';
+import { database } from '../dataBase';
 import { clearRobotMessage } from '../utils';
-import { getDatabase, ref,  update } from 'firebase/database';
-import { app } from '../firebase';
 
 export const addPostAction = (post, chatId) => ({
   type: ADD_POST,
@@ -36,21 +36,6 @@ export const addMesssageWithThunk = (post, chatId) => (dispatch) => {
 
 // eslint-disable-next-line no-unused-vars
 export const addMessageWithFirebase = (post, chatId) => () => {
-  const database = getDatabase(app)
-  console.log('ADD MESSAGE')
-
-  // const postListRef = ref(database, 'chats');
-  // const newPostRef = push(postListRef);
-  // set(newPostRef, { ...post });
-
-  // Write the new post's data simultaneously in the posts list and the user's post list.
-  const updates = {};
-  updates['/chats/' + chatId] = post;
-  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
-
-  return update(ref(database), updates);
-
-  // set(ref(database, 'chats/' + chatId), {
-    // post: post,
-  // });
+  const postListRef = ref(database, `chats/${chatId}/posts`);
+  set(push(postListRef), post);
 }

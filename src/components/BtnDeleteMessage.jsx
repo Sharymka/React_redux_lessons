@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 
-export default function BtnDeleteMessage({ postId, onClick, children }) {
+export default function BtnDeleteMessage({ onClick, children }) {
   return (
     <Button
       style={{
@@ -11,7 +11,7 @@ export default function BtnDeleteMessage({ postId, onClick, children }) {
         fontSize: '12px',
         marginTop: '10px',
       }}
-      onClick={() => onClick(postId)}
+      onClick={onClick}
       variant="contained"
       type="submit"
     >
