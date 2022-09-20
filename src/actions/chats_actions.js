@@ -1,4 +1,4 @@
-import { push, ref, set } from 'firebase/database';
+import { ref, set } from 'firebase/database';
 import { robotMessageAction } from '.';
 import { ADD_CHAT, ADD_POST, DELETE_POST } from '../constants/chats';
 import { database } from '../dataBase';
@@ -37,5 +37,5 @@ export const addMesssageWithThunk = (post, chatId) => (dispatch) => {
 // eslint-disable-next-line no-unused-vars
 export const addMessageWithFirebase = (post, chatId) => () => {
   const postListRef = ref(database, `chats/${chatId}/posts`);
-  set(push(postListRef), post);
+  set((postListRef), post);
 }
