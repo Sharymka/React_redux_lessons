@@ -1,3 +1,3 @@
 export default function RobotMessage(props) {
-  return <div className="robotM">{props.robotMessage}</div>;
+  return <div className="robotMessage">{props.robotMessage}</div>;
 }

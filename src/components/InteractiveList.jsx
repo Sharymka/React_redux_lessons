@@ -5,9 +5,9 @@ import ListItemText from "@mui/material/ListItemText";
 import BtnDeleteMessage from "./BtnDeleteMessage";
 import { deletePostAction } from "../actions";
 import { useSelector } from "react-redux";
-import "./style.css";
+import "../style.css";
 import { useMemo } from "react";
-import getChatById from "./store/ChatReducer/selectors";
+import getChatById from "../store/ChatReducer/selectors";
 
 export default function InteractiveList(props) {
   const { chatId } = props;

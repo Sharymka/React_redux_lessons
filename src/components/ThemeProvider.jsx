@@ -4,7 +4,6 @@ import {
   ThemeProvider as MUIThemeProvider,
 } from "@mui/material";
 import { useState, useMemo, createContext, useCallback } from "react";
-// import { ColorModeContext } from "@mui/material/styles";
 import { deepmerge } from "@mui/utils";
 export const colorModeServicesContext = createContext(undefined);
 
@@ -26,7 +25,8 @@ export default function ThemeProvider({
   return (
     <colorModeServicesContext.Provider value={toggleColorMode}>
       <MUIThemeProvider theme={theme}>
-        <CssBaseline>{children}</CssBaseline>
+        <CssBaseline />
+        {children}
       </MUIThemeProvider>
     </colorModeServicesContext.Provider>
   );

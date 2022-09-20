@@ -1,24 +1,21 @@
 import React from "react";
 import { Redirect, BrowserRouter, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
-import HomePage from "./components/pages/HomePage";
-import ChatPage from "./components/pages/ChatPage";
-import ProfilePage from "./components/pages/ProfilePage";
+import HomePage from "./pages/HomePage";
+import ChatPage from "./pages/ChatPage";
+import ProfilePage from "./pages/ProfilePage";
 import ThemeProvider from "./components/ThemeProvider";
 import BtnAddChat from "./components/BtnAddChat";
 import { useSelector } from "react-redux";
-import { getChats } from "./components/store/ChatReducer/selectors";
+import { getChats } from "./store/ChatReducer/selectors";
 import { addChatAction } from "./actions";
-import "./components/style.css";
+import "./style.css";
 
 function App() {
   const chats = useSelector(getChats());
   const chatsLength = Object.keys(chats).length;
 
   const addChat = () => {
-    console.log(chats);
-    console.log(chatsLength);
-
     addChatAction(chatsLength);
   };
 

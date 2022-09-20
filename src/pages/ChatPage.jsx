@@ -1,5 +1,5 @@
-import FormPropsTextFields from "../FormPropsTextFields";
-import InteractiveList from "../InteractiveList";
+import FormPropsTextFields from "../components/FormPropsTextFields";
+import InteractiveList from "../components/InteractiveList";
 
 export default function ChatPage(props) {
   const { chatId } = props;
