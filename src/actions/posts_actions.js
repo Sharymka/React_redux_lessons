@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_AUTHOR } from "../constants/post";
+import { ADD_MESSAGE, ADD_AUTHOR } from '../constants/post';
 
 export const changeMessageAction = (message) => ({
   type: ADD_MESSAGE,

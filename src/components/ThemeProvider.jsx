@@ -2,24 +2,25 @@ import {
   createTheme,
   CssBaseline,
   ThemeProvider as MUIThemeProvider,
-} from "@mui/material";
-import { useState, useMemo, createContext, useCallback } from "react";
-import { deepmerge } from "@mui/utils";
+} from '@mui/material';
+import {
+  useState, useMemo, createContext, useCallback,
+} from 'react';
+import { deepmerge } from '@mui/utils';
+
 export const colorModeServicesContext = createContext(undefined);
 
 export default function ThemeProvider({
-  initialMode = "light",
+  initialMode = 'light',
   initialTheme,
   children,
 }) {
   const [mode, setMode] = useState(initialMode);
 
-  const theme = useMemo(() => {
-    return createTheme(deepmerge(initialTheme, { palette: { mode } }));
-  }, [mode, initialTheme]);
+  const theme = useMemo(() => createTheme(deepmerge(initialTheme, { palette: { mode } })), [mode, initialTheme]);
 
   const toggleColorMode = useCallback(() => {
-    setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+    setMode((prevMode) => (prevMode === 'light' ? 'dark' : 'light'));
   }, []);
 
   return (

@@ -1,5 +1,5 @@
-import FormPropsTextFields from "../components/FormPropsTextFields";
-import InteractiveList from "../components/InteractiveList";
+import FormPropsTextFields from '../components/FormPropsTextFields';
+import InteractiveList from '../components/InteractiveList';
 
 export default function ChatPage(props) {
   const { chatId } = props;
@@ -8,7 +8,7 @@ export default function ChatPage(props) {
     <div className="container">
       <FormPropsTextFields chatId={chatId} />
       <div className="chat-list">
-        <InteractiveList chatId={chatId}></InteractiveList>
+        <InteractiveList chatId={chatId} />
       </div>
     </div>
   );

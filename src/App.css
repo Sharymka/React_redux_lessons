@@ -100,5 +100,21 @@
   font-size: 18px;
   color:rgb(111, 68, 117);
   font-weight: 700;
-  
+}
+
+.form_sign_in {
+  margin: 0 auto;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 15px;
+  width: 30%;
+
+}
+.btn_sign_in{
+  color: rgb(111, 68, 117)!important;
+  border-color: rgb(111, 68, 117) !important;
+  width: 20%;
+  align-self: center;
 }

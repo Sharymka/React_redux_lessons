@@ -1,8 +1,8 @@
-import { IconButton } from "@mui/material";
-import { useToggleModeServices } from "./hooks/UseToggleModeServices";
-import { useTheme } from "@emotion/react";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
+import { IconButton } from '@mui/material';
+import { useTheme } from '@emotion/react';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { useToggleModeServices } from './hooks/UseToggleModeServices';
 
 export default function BtnChangeTheme() {
   const toggleColorMode = useToggleModeServices();
@@ -14,10 +14,10 @@ export default function BtnChangeTheme() {
       component="label"
       onClick={toggleColorMode}
     >
-      {theme.palette.mode === "dark" ? (
-        <Brightness7Icon></Brightness7Icon>
+      {theme.palette.mode === 'dark' ? (
+        <Brightness7Icon />
       ) : (
-        <Brightness4Icon></Brightness4Icon>
+        <Brightness4Icon />
       )}
     </IconButton>
   );
