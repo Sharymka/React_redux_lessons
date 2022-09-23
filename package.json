@@ -2,14 +2,13 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.10.0",
     "@mui/utils": "^5.10.3",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
     "@testing-library/user-event": "^13.5.0",
     "firebase": "^9.9.4",
     "formik": "^2.2.9",
@@ -26,14 +25,16 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test": "jest"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest",
-      "plugin:react/recommended", "airbnb", "plugin:react/jsx-runtime"
+      "plugin:react/recommended",
+      "airbnb",
+      "plugin:react/jsx-runtime"
     ]
   },
   "browserslist": {
@@ -49,12 +50,33 @@
     ]
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.19.1",
+    "@babel/preset-react": "^7.18.6",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "babel-jest": "^29.0.3",
+    "dotenv": "^16.0.2",
     "eslint": "^8.23.1",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.8",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "jest": "^27.5.1",
+    "jest-dom": "^4.0.0",
+    "jest-fetch-mock": "^3.0.3",
+    "react-test-renderer": "^18.2.0"
+  },
+  "jest": {
+    "errorOnDeprecated": true,
+    "setupFiles": [
+      "./jestsetup.js"
+    ],
+    "setupFilesAfterEnv": [
+      "./setupFiles.js"
+    ],
+    "testEnvironment": "jsdom"
+  
   }
 }

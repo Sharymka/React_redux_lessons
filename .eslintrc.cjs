@@ -3,11 +3,11 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    jest: true,
   },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    // 'airbnb',
     'plugin:react/jsx-runtime',
   ],
   overrides: [],
@@ -17,7 +17,7 @@ module.exports = {
   },
   plugins: ['react'],
   rules: {
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.test.jsx'] }],
     // 'linebreak-style': ["error", "windows"],
     'import/prefer-default-export': ['off'],
     'react/prop-types': ['off'],

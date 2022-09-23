@@ -1,6 +1,6 @@
 import { Button } from '@mui/material';
 
-export default function BtnSendMessage({ children }) {
+export default function BtnSendMessage({Children}) {
   return (
     <Button
       style={{
@@ -13,7 +13,7 @@ export default function BtnSendMessage({ children }) {
       variant="contained"
       type="submit"
     >
-      {children}
+       {Children}
     </Button>
   );
 }

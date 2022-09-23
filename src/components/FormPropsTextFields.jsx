@@ -1,8 +1,8 @@
 import Box from '@mui/material/Box';
 import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { addMessageWithFirebase, changeAuthorAction, changeMessageAction } from '../actions';
-import '../style.css';
+import { changeAuthorAction, changeMessageAction } from '../actions';
+// import '../style.css';
 import AuthorInput from './AuthorInput';
 import BtnSendMessage from './BtnSendMessage';
 import MessageInput from './MessageInput';
@@ -29,11 +29,10 @@ export default function FormPropsTextFields(props) {
       e.preventDefault();
       console.log('event', e);
       // addMesssageWithThunk(post, chatId);
-      addMessageWithFirebase(post, chatId);
+      // addMessageWithFirebase(post, chatId);
       console.log('event2', e);
     },
     [post, chatId],
-  
   );
 
   return (
@@ -70,9 +69,9 @@ export default function FormPropsTextFields(props) {
         }}
       >
         <div>
-          <MessageInput value={post.message} onChange={onChangeMessage} />
+          <MessageInput value={post.message} onChange={onChangeMessage}  />
           <AuthorInput value={post.author} onChange={onChangeAuthor} />
-          <BtnSendMessage>Send message</BtnSendMessage>
+          <BtnSendMessage data-testid = 'btnSend'>Send message</BtnSendMessage>
         </div>
         <RobotMessage robotMessage={message} />
       </Box>

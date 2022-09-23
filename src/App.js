@@ -1,22 +1,20 @@
-import { useEffect} from 'react';
-import {
-  Redirect, BrowserRouter, Switch, Route
-} from 'react-router-dom';
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
+import { addChatAction, getDogsAction } from './actions';
 import './App.css';
-import RegistrationPage from './pages/RegistrationPage';
-import ChatPage from './pages/ChatPage';
-import ProfilePage from './pages/ProfilePage';
-import DogsPage from './pages/DogsPage';
-import SignInPage from './pages/SignInPage';
-import ThemeProvider from './components/ThemeProvider';
 import BtnAddChat from './components/BtnAddChat';
+import ThemeProvider from './components/ThemeProvider';
+import ChatPage from './pages/ChatPage';
+import DogsPage from './pages/DogsPage';
+import ProfilePage from './pages/ProfilePage';
+import RegistrationPage from './pages/RegistrationPage';
+import SignInPage from './pages/SignInPage';
 import { getChats } from './store/ChatReducer/selectors';
-import { getDogsAction, addChatAction } from './actions';
 import { getUser } from './store/userReducer/selector';
 
-import './style.css';
+// import './style.css';
 import { Header } from './components/Header';
 // import { render } from '@testing-library/react';
 
