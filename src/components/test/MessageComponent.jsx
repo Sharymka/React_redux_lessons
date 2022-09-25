@@ -1,5 +1,5 @@
-import React from "react";
-import "./style.css";
+import React from 'react';
+import './style.css';
 
 export default class MessageComponent extends React.Component {
   constructor(props) {
@@ -69,13 +69,17 @@ export default class MessageComponent extends React.Component {
         <div className="list">
           Message List:
           {this.state.messageList.map((message, index) => (
-            <div key={"message" + index} className="list-item">
+            <div key={`message${index}`} className="list-item">
               <div className="text">
                 <span className="author">
-                  {index + 1}. {message.author}: &nbsp;
+                  {index + 1}
+                  .
+                  {' '}
+                  {message.author}
+                  : &nbsp;
                 </span>
-                "{message.message}"
-              </div>
+                &quot;{message.message}&quot;
+                            </div>
             </div>
           ))}
         </div>

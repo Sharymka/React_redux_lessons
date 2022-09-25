@@ -1,7 +1,7 @@
-import { ADD_ROBOT_MESSAGE } from "../../constants/robot";
+import { ADD_ROBOT_MESSAGE } from '../../constants/robot';
 
 const initialState = {
-  robotMessage: "",
+  robotMessage: '',
 };
 
 export const robotReducer = (state = initialState, action) => {

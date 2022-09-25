@@ -1,7 +1,7 @@
-import { ERROR_MESSAGE } from "../../constants/errors";
+import { ERROR_MESSAGE } from '../../constants/errors';
 
 const initialState = {
-  errorMessage: "",
+  errorMessage: '',
 };
 
 export const errorReducer = (state = initialState, action) => {
